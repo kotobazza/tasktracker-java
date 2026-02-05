@@ -45,7 +45,6 @@ public class TasksRepository {
             Files.createFile(path);
     }
 
-    //TODO: unblocking needed
 
     public boolean saveTasks(Iterable<Task> tasks){
         try{
@@ -61,15 +60,9 @@ public class TasksRepository {
         }
     }
 
-
-
-    //TODO: unblocking needed
-
     public Optional<List<Task>> loadTasksFromDefaultUserLocation() {
         return loadTasksFromLocation(defaultAppLocation.resolve("tasks.json"));
     }
-
-    //TODO: unblocking needed
 
     public Optional<List<Task>> loadTasksFromLocation(Path location){
         try{
