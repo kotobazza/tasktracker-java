@@ -14,7 +14,11 @@ import java.util.Optional;
 
 public class TasksRepository {
     private final Path defaultAppLocation;
-    private final ObjectMapper tasksMapper;
+
+    private final ObjectMapper tasksMapper = new ObjectMapper()
+            .registerModule(new JavaTimeModule())
+            .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+            .enable(SerializationFeature.INDENT_OUTPUT);;
 
     public TasksRepository(){
         String xdgConfigHome = System.getenv("XDG_CONFIG_HOME");
@@ -28,10 +32,6 @@ public class TasksRepository {
 
         defaultAppLocation = baseDir.resolve("com.kotobazza.tasktracker");
 
-        tasksMapper = new ObjectMapper()
-                .registerModule(new JavaTimeModule())
-                .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-                .enable(SerializationFeature.INDENT_OUTPUT);
     }
 
     //TODO: unblocking needed
