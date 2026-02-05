@@ -8,3 +8,6 @@ Features:
 + [ ] Look at already done tasks and tasks "in progress"
 + [ ] Update task status (using unique taskID)
 + [ ] Look when tasks got updated statuses and when they were created
+
+
+For user interface - use TUI libs to implement semi-graphical usage
