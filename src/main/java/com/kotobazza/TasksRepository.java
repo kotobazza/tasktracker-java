@@ -64,7 +64,7 @@ public class TasksRepository {
         try{
             List<Task> tasks = tasksMapper.readValue(
                     new File(location.toUri()),
-                    new TypeReference<List<Task>>() {}
+                    new TypeReference<>() {}
             );
             return Optional.of(tasks);
         } catch (IOException e){
