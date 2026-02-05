@@ -39,11 +39,22 @@ public class TasksRepository {
         } catch (IOException ignored){}
     }
 
+
+    private void createFileIfNotExists(Path path) throws IOException {
+        if(!Files.exists(path))
+            Files.createFile(path);
+    }
+
     //TODO: unblocking needed
 
     public boolean saveTasks(Iterable<Task> tasks){
         try{
-            tasksMapper.writeValue(new File(defaultAppLocation.resolve("tasks.json").toUri()), tasks);
+            Path tasksJson = defaultAppLocation.resolve("tasks.json");
+
+            createFileIfNotExists(tasksJson);
+
+            tasksMapper.writeValue(new File(tasksJson.toUri()), tasks);
+
             return true;
         } catch (IOException e){
             return false;
@@ -62,6 +73,8 @@ public class TasksRepository {
 
     public Optional<List<Task>> loadTasksFromLocation(Path location){
         try{
+            createFileIfNotExists(location);
+
             List<Task> tasks = tasksMapper.readValue(
                     new File(location.toUri()),
                     new TypeReference<>() {}
