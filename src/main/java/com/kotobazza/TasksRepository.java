@@ -50,15 +50,7 @@ public class TasksRepository {
     //TODO: unblocking needed
 
     public Optional<List<Task>> loadTasksFromDefaultUserLocation() {
-        try{
-            List<Task> tasks = tasksMapper.readValue(
-                    new File(defaultAppLocation.resolve("tasks.json").toUri()),
-                    new TypeReference<List<Task>>() {}
-            );
-            return Optional.of(tasks);
-        } catch (IOException e){
-            return Optional.empty();
-        }
+        return loadTasksFromLocation(defaultAppLocation.resolve("tasks.json"));
     }
 
     //TODO: unblocking needed
