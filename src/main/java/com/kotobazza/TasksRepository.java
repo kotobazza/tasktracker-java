@@ -7,6 +7,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -32,6 +33,10 @@ public class TasksRepository {
 
         defaultAppLocation = baseDir.resolve("com.kotobazza.tasktracker");
 
+        try{
+            if(!Files.exists(defaultAppLocation))
+                Files.createDirectories(defaultAppLocation);
+        } catch (IOException ignored){}
     }
 
     //TODO: unblocking needed
