@@ -18,7 +18,7 @@ public class TaskTrackerList extends TaskTrackerCommandSuperclass{
 
     @Override
     public Integer call() throws Exception {
-        Map<String, Task> tasks = service.getTasks(filePath);
+        Map<String, Task> tasks = getService().getTasks(filePath);
 
         printGreeting();
 

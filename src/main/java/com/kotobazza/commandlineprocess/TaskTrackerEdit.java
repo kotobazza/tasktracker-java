@@ -20,7 +20,7 @@ public class TaskTrackerEdit extends TaskTrackerCommandSuperclass{
 
     @Override
     public Integer call() throws Exception {
-        if(!service.editTaskDescription(filePath, id, newDescription)){
+        if(!getService().editTaskDescription(filePath, id, newDescription)){
             System.out.println("Not accepted.");
             return 127;
         }

@@ -12,7 +12,11 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 
 public abstract class TaskTrackerCommandSuperclass implements Callable<Integer> {
-    static TasksService service = new TasksService();
+    protected TasksService getService(){
+        return new TasksService();
+    }
+
+
 
     private static String convertTaskStateIntoSymbolicForm(TaskState state){
         return switch (state) {

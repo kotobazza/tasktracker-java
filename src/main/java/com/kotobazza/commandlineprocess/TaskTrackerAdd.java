@@ -16,7 +16,7 @@ public class TaskTrackerAdd extends TaskTrackerCommandSuperclass { ;
     @Override
     public Integer call() throws Exception {
 
-        service.addNewTask(filePath, description);
+        getService().addNewTask(filePath, description);
 
         System.out.println("Accepted.");
         return 0;

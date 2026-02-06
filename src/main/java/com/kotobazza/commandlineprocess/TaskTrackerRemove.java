@@ -18,7 +18,7 @@ public class TaskTrackerRemove extends TaskTrackerCommandSuperclass{
     public Integer call() throws Exception {
 
 
-        if(!service.removeTask(filePath, id)){
+        if(!getService().removeTask(filePath, id)){
             System.out.println("Not removed this task from tasks list: "+id);
             return 127;
         }
