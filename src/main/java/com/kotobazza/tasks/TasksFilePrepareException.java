@@ -1,4 +1,4 @@
-package com.kotobazza;
+package com.kotobazza.tasks;
 
 public class TasksFilePrepareException extends RuntimeException {
     public TasksFilePrepareException(String message) {

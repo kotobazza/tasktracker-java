@@ -1,4 +1,4 @@
-package com.kotobazza;
+package com.kotobazza.tasks;
 
 public enum TaskState {
     TO_DO,

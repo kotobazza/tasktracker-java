@@ -1,4 +1,4 @@
-package com.kotobazza;
+package com.kotobazza.tasks;
 
 import java.nio.file.Path;
 import java.util.Map;
