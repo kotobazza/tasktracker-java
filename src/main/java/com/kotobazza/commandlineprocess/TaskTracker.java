@@ -16,8 +16,12 @@ import picocli.CommandLine;
         }
 )
 public class TaskTracker extends TaskTrackerCommandSuperclass {
+    @CommandLine.Spec
+    CommandLine.Model.CommandSpec spec;
+
     @Override
-    public Integer call() throws Exception {
+    public Integer call() {
+        spec.commandLine().usage(System.out);
         return 0;
     }
 
