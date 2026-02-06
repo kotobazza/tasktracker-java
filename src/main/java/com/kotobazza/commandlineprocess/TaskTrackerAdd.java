@@ -19,6 +19,11 @@ public class TaskTrackerAdd extends TaskTrackerCommandSuperclass { ;
 
     @Override
     public Integer call() throws Exception {
+
+        if(filePath==null){
+            System.out.println("got null filepath");
+        }
+
         Map<String, Task> tasks = loadTasksFromPath(filePath);
         Task newTask = new Task(description);
 
