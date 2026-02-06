@@ -19,20 +19,15 @@ public class TaskTrackerRemove extends TaskTrackerCommandSuperclass{
 
     @Override
     public Integer call() throws Exception {
-        Map<String, Task> tasks = repo.loadTasksFromLocation(filePath);
 
-        if(!tasks.containsKey(id)){
-            System.out.println("No found index in tasks file: "+id);
+
+        if(!service.removeTask(filePath, id)){
+            System.out.println("Not removed this task from tasks list: "+id);
             return 127;
         }
 
         //TODO: double acceptance???
-
-        tasks.remove(id);
-        if(!repo.saveTasks(tasks.values(), filePath)){
-            System.out.println("Not saved tasks into location");
-            return 127;
-        }
+        System.out.println("Accepted.");
         return 0;
 
     }

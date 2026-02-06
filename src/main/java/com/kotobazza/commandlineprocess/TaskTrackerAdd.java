@@ -1,11 +1,7 @@
 package com.kotobazza.commandlineprocess;
 
-
-import com.kotobazza.Task;
 import picocli.CommandLine;
-
 import java.nio.file.Path;
-import java.util.Map;
 
 @CommandLine.Command(name = "add", description = "Add a new task")
 public class TaskTrackerAdd extends TaskTrackerCommandSuperclass { ;
@@ -20,19 +16,13 @@ public class TaskTrackerAdd extends TaskTrackerCommandSuperclass { ;
     @Override
     public Integer call() throws Exception {
 
-        Map<String, Task> tasks = repo.loadTasksFromLocation(filePath);
-        Task newTask = new Task(description);
+        service.addNewTask(filePath, description);
 
-        tasks.put(newTask.getId(), newTask);
+        System.out.println("Accepted.");
+        return 0;
 
-        printGreeting();
 
-        if(repo.saveTasks(tasks.values(), filePath)){
-            System.out.println("Accepted.");
-            return 0;
-        } else {
-            System.err.println("Not accepted");
-            return 127;
-        }
+
+
     }
 }

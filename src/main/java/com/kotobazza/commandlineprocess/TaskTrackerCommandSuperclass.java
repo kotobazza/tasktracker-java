@@ -2,7 +2,7 @@ package com.kotobazza.commandlineprocess;
 
 import com.kotobazza.Task;
 import com.kotobazza.TaskState;
-import com.kotobazza.TasksRepository;
+import com.kotobazza.TasksService;
 
 
 import java.time.LocalDateTime;
@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 
 public abstract class TaskTrackerCommandSuperclass implements Callable<Integer> {
-    static TasksRepository repo = new TasksRepository();
+    static TasksService service = new TasksService();
 
     private static String convertTaskStateIntoSymbolicForm(TaskState state){
         return switch (state) {

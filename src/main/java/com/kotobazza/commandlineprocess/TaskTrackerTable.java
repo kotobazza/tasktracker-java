@@ -18,7 +18,7 @@ public class TaskTrackerTable extends TaskTrackerCommandSuperclass{
 
     @Override
     public Integer call() throws Exception {
-        Map<String, Task> tasks = repo.loadTasksFromLocation(filePath);
+        Map<String, Task> tasks = service.getTasks(filePath);
 
         printGreeting();
 
