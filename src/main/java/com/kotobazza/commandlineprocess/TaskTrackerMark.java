@@ -24,7 +24,7 @@ public class TaskTrackerMark extends TaskTrackerCommandSuperclass{
             TaskState newState = TaskState.valueOf(state.toUpperCase(Locale.ROOT));
 
             if(!getService().markTaskWithState(tracker.filePath, id, newState)){
-                System.out.println("Not saved tasks into location");
+                System.out.println("Not marked this task from tasks list: "+id);
                 return 127;
             }
 
