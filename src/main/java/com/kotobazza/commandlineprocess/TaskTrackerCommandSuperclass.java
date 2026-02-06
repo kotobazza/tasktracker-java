@@ -64,7 +64,7 @@ public abstract class TaskTrackerCommandSuperclass implements Callable<Integer> 
     }
 
     public void printDivider(Integer width){
-        System.out.println(" ".repeat(width));
+        System.out.println("-".repeat(width));
     }
 
     public void printGreeting(){
