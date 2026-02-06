@@ -61,7 +61,7 @@ public class TasksRepository {
 
         try{
             createFileIfNotExists(tasksJson);
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new TasksFilePrepareException("Didn't prepare tasks file due to IO error: " + e.getMessage());
         }
 
@@ -76,7 +76,7 @@ public class TasksRepository {
         Path tasksJson = defineEffectivePathToSaveTasks(location);
         try{
             createFileIfNotExists(tasksJson);
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new TasksFilePrepareException("Didn't prepare tasks file due to IO error: " + e.getMessage());
         }
 
