@@ -14,7 +14,7 @@ Features:
 
 
 ```bash
-Usage: java -jar tastracker.jar [COMMAND]
+Usage: tasktracker [COMMAND]
 Simple CLI task manager
 Commands:
   add     Add a new task
@@ -23,4 +23,5 @@ Commands:
   remove  Remove a task from list
   table   Show whole info about tasks
   edit    Edit task description
+  show    Show info about user environment
 ```
