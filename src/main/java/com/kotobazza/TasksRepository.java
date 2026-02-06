@@ -45,6 +45,15 @@ public class TasksRepository {
             Files.createFile(path);
     }
 
+    public Path defineEffectivePathToSaveTasks(Path location){
+        if(location == null){
+            return defaultAppLocation.resolve("tasks.json");
+        } else if(location.toFile().isDirectory()){
+            return location.resolve("tasks.json");
+        } else{
+            return location;
+        }
+    }
 
     public boolean saveTasks(Iterable<Task> tasks){
         try{
