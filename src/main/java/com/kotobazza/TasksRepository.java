@@ -75,10 +75,12 @@ public class TasksRepository {
 
     public Optional<List<Task>> loadTasksFromLocation(Path location){
         try{
-            createFileIfNotExists(location);
+            Path tasksJson = defineEffectivePathToSaveTasks(location);
+
+            createFileIfNotExists(tasksJson);
 
             List<Task> tasks = tasksMapper.readValue(
-                    new File(location.toUri()),
+                    new File(tasksJson.toUri()),
                     new TypeReference<>() {}
             );
             return Optional.of(tasks);
