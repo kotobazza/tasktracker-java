@@ -5,19 +5,22 @@ import java.util.Map;
 
 
 public class TasksService {
-    private static final TasksRepository repo = new TasksRepository();
+
+    public TasksRepository getRepo(){
+        return new TasksRepository();
+    }
 
     public void addNewTask(Path filePath, String description){
-        Map<String, Task> tasks = repo.loadTasksFromLocation(filePath);
+        Map<String, Task> tasks = getRepo().loadTasksFromLocation(filePath);
         Task newTask = new Task(description);
 
         tasks.put(newTask.getId(), newTask);
 
-        repo.saveTasks(tasks.values(), filePath);
+        getRepo().saveTasks(tasks.values(), filePath);
     }
 
     public boolean editTaskDescription(Path filePath, String id, String newDescription){
-        Map<String, Task> tasks = repo.loadTasksFromLocation(filePath);
+        Map<String, Task> tasks = getRepo().loadTasksFromLocation(filePath);
 
         if(!tasks.containsKey(id)){
             return false;
@@ -26,17 +29,17 @@ public class TasksService {
         Task task = tasks.get(id);
         task.setDescription(newDescription);
         tasks.put(task.getId(), task);
-        repo.saveTasks(tasks.values(), filePath);
+        getRepo().saveTasks(tasks.values(), filePath);
         return true;
     }
 
     public Map<String, Task> getTasks(Path filePath){
-        return repo.loadTasksFromLocation(filePath);
+        return getRepo().loadTasksFromLocation(filePath);
     }
 
 
     public boolean markTaskWithState(Path filePath, String id, TaskState state){
-        Map<String, Task> tasks = repo.loadTasksFromLocation(filePath);
+        Map<String, Task> tasks = getRepo().loadTasksFromLocation(filePath);
 
         if(!tasks.containsKey(id)){
             return false;
@@ -50,18 +53,18 @@ public class TasksService {
     }
 
     public boolean removeTask(Path filePath, String id){
-        Map<String, Task> tasks = repo.loadTasksFromLocation(filePath);
+        Map<String, Task> tasks = getRepo().loadTasksFromLocation(filePath);
         boolean existed = tasks.containsKey(id);
         if (existed) {
             tasks.remove(id);
-            repo.saveTasks(tasks.values(), filePath);
+            getRepo().saveTasks(tasks.values(), filePath);
         }
         return existed;
     }
 
 
     public Path getEffectivePathForTaskOnLocation(Path location){
-        return repo.defineEffectivePathToSaveTasks(location);
+        return getRepo().defineEffectivePathToSaveTasks(location);
     }
 
 
