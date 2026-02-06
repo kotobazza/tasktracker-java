@@ -2,7 +2,6 @@
 https://roadmap.sh/projects/task-tracker
 
 Simple CLI App for managing tasks.
-Java v21
 
 Features:
 + [X] Add a new task with description
