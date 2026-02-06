@@ -19,23 +19,13 @@ public abstract class TaskTrackerCommandSuperclass implements Callable<Integer> 
 
     public static Map<String, Task> loadTasksFromPath(Path path){
 
-        if(path == null){
-            Optional<List<Task>> loadedTasksFromDefault = repo.loadTasksFromDefaultUserLocation();
-            return loadedTasksFromDefault.map(tasks -> tasks
-                    .stream()
-                    .collect(Collectors.toMap(
-                            Task::getId,
-                            item -> item
-                    ))).orElseGet(HashMap::new);
-        } else {
-            Optional<List<Task>> loadedTasksFromDefault = repo.loadTasksFromLocation(path);
-            return loadedTasksFromDefault.map(tasks -> tasks
-                    .stream()
-                    .collect(Collectors.toMap(
-                            Task::getId,
-                            item -> item
-                    ))).orElseGet(HashMap::new);
-        }
+        Optional<List<Task>> loadedTasksFromDefault = repo.loadTasksFromLocation(path);
+        return loadedTasksFromDefault.map(tasks -> tasks
+                .stream()
+                .collect(Collectors.toMap(
+                        Task::getId,
+                        item -> item
+                ))).orElseGet(HashMap::new);
     }
 
     private static String convertTaskStateIntoSymbolicForm(TaskState state){
