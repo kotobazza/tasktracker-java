@@ -3,7 +3,7 @@ https://roadmap.sh/projects/task-tracker
 
 Simple CLI App for managing tasks.
 
-Features:
+### Features
 + [X] Add a new task with description
 + [X] Look at tasks in different states
 + [X] Update task status (using unique taskID)
@@ -11,7 +11,7 @@ Features:
 + [X] Remove tasks if needed
 + [X] Update task description
 
-
+### Usage
 ```bash
 Usage: tasktracker [COMMAND]
 Simple CLI task manager
@@ -25,8 +25,17 @@ Commands:
   show    Show info about user environment
 ```
 
+### Quick start
+```bash
+mvn package
+java -jar target/tasktracker.jar add "Buy some milk"
+```
 
-Future features:
+By default `tasktracker` uses `${XDG_DATA_HOME}/com.kotobazza.tasktracker/tasks.json` for Linux (with other OSes is incompatible)
+For alternate tasks path use key `--file`/`-f` and specify custom json file
+
+
+### Future features
 + [ ] Use list as "list today"
 + [ ] Add selection by day and time
 + [ ] Add due dates
