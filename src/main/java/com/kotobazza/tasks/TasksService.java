@@ -50,7 +50,13 @@ public class TasksService {
     }
 
     public boolean removeTask(Path filePath, String id){
-        return repo.loadTasksFromLocation(filePath).remove(id) != null;
+        Map<String, Task> tasks = repo.loadTasksFromLocation(filePath);
+        boolean existed = tasks.containsKey(id);
+        if (existed) {
+            tasks.remove(id);
+            repo.saveTasks(tasks.values(), filePath);
+        }
+        return existed;
     }
 
 
