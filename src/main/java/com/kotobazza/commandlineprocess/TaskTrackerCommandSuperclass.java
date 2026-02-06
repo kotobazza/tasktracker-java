@@ -1,8 +1,8 @@
 package com.kotobazza.commandlineprocess;
 
-import com.kotobazza.Task;
-import com.kotobazza.TaskState;
-import com.kotobazza.TasksService;
+import com.kotobazza.tasks.Task;
+import com.kotobazza.tasks.TaskState;
+import com.kotobazza.tasks.TasksService;
 
 
 import java.nio.file.Path;
