@@ -54,5 +54,10 @@ public class TasksService {
     }
 
 
+    public Path getEffectivePathForTaskOnLocation(Path location){
+        return repo.defineEffectivePathToSaveTasks(location);
+    }
+
+
 
 }
