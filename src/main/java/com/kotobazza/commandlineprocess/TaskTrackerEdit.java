@@ -25,7 +25,7 @@ public class TaskTrackerEdit extends TaskTrackerCommandSuperclass{
 
     @Override
     public Integer call() throws Exception {
-        Map<String, Task> tasks = loadTasksFromPath(filePath);
+        Map<String, Task> tasks = repo.loadTasksFromLocation(filePath);
 
         if(!tasks.containsKey(id)){
             System.out.println("No found index in tasks file: "+id);

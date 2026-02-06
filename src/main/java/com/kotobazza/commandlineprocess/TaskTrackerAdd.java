@@ -20,7 +20,7 @@ public class TaskTrackerAdd extends TaskTrackerCommandSuperclass { ;
     @Override
     public Integer call() throws Exception {
 
-        Map<String, Task> tasks = loadTasksFromPath(filePath);
+        Map<String, Task> tasks = repo.loadTasksFromLocation(filePath);
         Task newTask = new Task(description);
 
         tasks.put(newTask.getId(), newTask);

@@ -4,29 +4,14 @@ import com.kotobazza.Task;
 import com.kotobazza.TaskState;
 import com.kotobazza.TasksRepository;
 
-import java.nio.file.Path;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.Callable;
-import java.util.stream.Collectors;
 
 public abstract class TaskTrackerCommandSuperclass implements Callable<Integer> {
     static TasksRepository repo = new TasksRepository();
-
-    public static Map<String, Task> loadTasksFromPath(Path path){
-
-        Optional<List<Task>> loadedTasksFromDefault = repo.loadTasksFromLocation(path);
-        return loadedTasksFromDefault.map(tasks -> tasks
-                .stream()
-                .collect(Collectors.toMap(
-                        Task::getId,
-                        item -> item
-                ))).orElseGet(HashMap::new);
-    }
 
     private static String convertTaskStateIntoSymbolicForm(TaskState state){
         return switch (state) {

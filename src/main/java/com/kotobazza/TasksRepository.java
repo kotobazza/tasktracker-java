@@ -10,8 +10,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class TasksRepository {
     private final Path defaultAppLocation;
@@ -69,19 +72,23 @@ public class TasksRepository {
         }
     }
 
-    public Optional<List<Task>> loadTasksFromLocation(Path location){
+    public Map<String, Task> loadTasksFromLocation(Path location){
         try{
             Path tasksJson = defineEffectivePathToSaveTasks(location);
 
             createFileIfNotExists(tasksJson);
 
-            List<Task> tasks = tasksMapper.readValue(
+            List<Task> loadedTasksFromDefault = tasksMapper.readValue(
                     new File(tasksJson.toUri()),
                     new TypeReference<>() {}
             );
-            return Optional.of(tasks);
+            return loadedTasksFromDefault.stream()
+                    .collect(Collectors.toMap(
+                            Task::getId,
+                            item -> item
+                    ));
         } catch (IOException e){
-            return Optional.empty();
+            return new HashMap<>();
         }
     }
 
