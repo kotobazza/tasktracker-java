@@ -50,7 +50,7 @@ public class TasksService {
     }
 
     public boolean removeTask(Path filePath, String id){
-        return repo.loadTasksFromLocation(filePath).remove(id) == null;
+        return repo.loadTasksFromLocation(filePath).remove(id) != null;
     }
 
 
