@@ -34,11 +34,6 @@ public class TasksRepository {
         }
 
         defaultAppLocation = baseDir.resolve("com.kotobazza.tasktracker");
-
-        try{
-            if(!Files.exists(defaultAppLocation))
-                Files.createDirectories(defaultAppLocation);
-        } catch (IOException ignored){}
     }
 
 
