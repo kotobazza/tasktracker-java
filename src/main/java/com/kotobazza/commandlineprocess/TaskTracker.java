@@ -2,8 +2,6 @@ package com.kotobazza.commandlineprocess;
 
 import picocli.CommandLine;
 
-import java.util.concurrent.Callable;
-
 @CommandLine.Command(
         name = "tasktracker",
         version = "TaskTracker 1.0",
@@ -14,6 +12,7 @@ import java.util.concurrent.Callable;
                 TaskTrackerMark.class,
                 TaskTrackerRemove.class,
                 TaskTrackerTable.class,
+                TaskTrackerEdit.class
         }
 )
 public class TaskTracker extends TaskTrackerCommandSuperclass {
