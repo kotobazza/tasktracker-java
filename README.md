@@ -30,5 +30,5 @@ Future features:
 + [ ] Use list as "list today"
 + [ ] Add selection by day and time
 + [ ] Add due dates
-+ [ ] Add "tasktracker graphical" and merge full-tui into dev
++ [ ] Add "tasktracker graphical" and merge full-tui into tui-command to resolve conflict between these versions
 + [ ] Add prefix search for tasks
