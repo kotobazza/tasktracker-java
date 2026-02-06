@@ -62,7 +62,7 @@ public class TasksRepository {
         try{
             createFileIfNotExists(tasksJson);
         } catch (IOException e) {
-            throw new TasksFilePrepareException("Didn't create tasks file due to IO error: " + e.getMessage());
+            throw new TasksFilePrepareException("Didn't prepare tasks file due to IO error: " + e.getMessage());
         }
 
         try {
@@ -77,7 +77,7 @@ public class TasksRepository {
         try{
             createFileIfNotExists(tasksJson);
         } catch (IOException e) {
-            throw new TasksFilePrepareException("Didn't create tasks file due to IO error: " + e.getMessage());
+            throw new TasksFilePrepareException("Didn't prepare tasks file due to IO error: " + e.getMessage());
         }
 
 
