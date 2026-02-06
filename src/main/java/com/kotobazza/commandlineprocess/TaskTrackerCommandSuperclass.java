@@ -63,24 +63,6 @@ public abstract class TaskTrackerCommandSuperclass implements Callable<Integer> 
         return time.format(TASK_DATE_FORMATTER);
     }
 
-    private String help = """
-            Usage: tasktracker
-           \s
-            \t\t(to show created tasks and help)
-           \s
-            \tor tasktracker add <"description">
-           \s
-            \t\t(to add new task)
-           \s
-            \tor tasktracker mark <id> <state> \n
-            \t\t (to mark task by one of states) \n
-           \s
-           \s""";
-
-    public void printHelp(){
-        System.out.println(help);
-    }
-
     public void printDivider(Integer width){
         System.out.println(" ".repeat(width));
     }

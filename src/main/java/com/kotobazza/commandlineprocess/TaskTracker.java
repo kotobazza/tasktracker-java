@@ -13,7 +13,6 @@ import java.util.concurrent.Callable;
                 TaskTrackerList.class,
                 TaskTrackerMark.class,
                 TaskTrackerRemove.class,
-                TaskTrackerHelp.class,
                 TaskTrackerTable.class,
         }
 )
