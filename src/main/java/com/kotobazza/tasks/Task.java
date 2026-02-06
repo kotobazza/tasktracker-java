@@ -1,4 +1,4 @@
-package com.kotobazza;
+package com.kotobazza.tasks;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;

@@ -1,4 +1,4 @@
-package com.kotobazza;
+package com.kotobazza.tasks;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
