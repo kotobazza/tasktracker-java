@@ -25,3 +25,11 @@ Commands:
   edit    Edit task description
   show    Show info about user environment
 ```
+
+
+Future features:
++ [ ] Use list as "list today"
++ [ ] Add selection by day and time
++ [ ] Add due dates
++ [ ] Add "tasktracker graphical" and merge full-tui into dev
++ [ ] Add prefix search for tasks
