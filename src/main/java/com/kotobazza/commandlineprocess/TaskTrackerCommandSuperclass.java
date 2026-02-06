@@ -42,7 +42,7 @@ public abstract class TaskTrackerCommandSuperclass implements Callable<Integer> 
         return switch (state) {
             case TaskState.TO_DO -> "!";
             case TaskState.IN_PROGRESS -> "~";
-            case TaskState.DONE -> "✔\uFE0F";
+            case TaskState.DONE -> "✔";
         };
     }
 
