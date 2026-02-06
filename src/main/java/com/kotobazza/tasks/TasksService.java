@@ -49,6 +49,7 @@ public class TasksService {
 
         task.setState(state);
         tasks.put(task.getId(), task);
+        getRepo().saveTasks(tasks.values(), filePath);
         return true;
     }
 
