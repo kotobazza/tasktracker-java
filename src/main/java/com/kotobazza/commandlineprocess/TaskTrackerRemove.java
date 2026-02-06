@@ -1,5 +1,6 @@
 package com.kotobazza.commandlineprocess;
 
+import com.kotobazza.tasks.TaskNotFoundException;
 import picocli.CommandLine;
 import java.nio.file.Path;
 
@@ -19,8 +20,7 @@ public class TaskTrackerRemove extends TaskTrackerCommandSuperclass{
 
 
         if(!getService().removeTask(tracker.filePath, id)){
-            System.out.println("Not removed this task from tasks list: "+id);
-            return 127;
+            throw new TaskNotFoundException("Didn't find a task in tasks list with this id: "+id);
         }
 
         //TODO: double acceptance???

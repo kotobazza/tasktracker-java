@@ -1,7 +1,11 @@
 package com.kotobazza.commandlineprocess;
 
+import com.kotobazza.tasks.StateNotFoundException;
+import com.kotobazza.tasks.TaskNotFoundException;
 import com.kotobazza.tasks.TaskState;
 import picocli.CommandLine;
+
+import javax.swing.plaf.nimbus.State;
 import java.nio.file.Path;
 import java.util.Locale;
 
@@ -24,16 +28,19 @@ public class TaskTrackerMark extends TaskTrackerCommandSuperclass{
             TaskState newState = TaskState.valueOf(state.toUpperCase(Locale.ROOT));
 
             if(!getService().markTaskWithState(tracker.filePath, id, newState)){
-                System.out.println("Not marked this task from tasks list: "+id);
-                return 127;
+                throw new TaskNotFoundException("Didn't find a task in tasks list with this id: "+id);
             }
 
             System.out.println("Accepted.");
             return 0;
 
         } catch (IllegalArgumentException e){
-            System.out.println("Got undefined state: "+state);
-            return 127;
+            StringBuilder bld = new StringBuilder();
+            for(TaskState value: TaskState.values()){
+                bld.append(value.name());
+                bld.append("\n");
+            }
+            throw new StateNotFoundException("Couldn't find a variation of state: " + state + "\nAvailable states (may be printed in lower_case):\n"+bld);
         }
 
 

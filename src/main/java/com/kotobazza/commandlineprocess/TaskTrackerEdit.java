@@ -1,6 +1,7 @@
 package com.kotobazza.commandlineprocess;
 
 
+import com.kotobazza.tasks.TaskNotFoundException;
 import picocli.CommandLine;
 import java.nio.file.Path;
 
@@ -20,8 +21,7 @@ public class TaskTrackerEdit extends TaskTrackerCommandSuperclass{
     @Override
     public Integer call() throws Exception {
         if(!getService().editTaskDescription(tracker.filePath, id, newDescription)){
-            System.out.println("Not edited this task from tasks list: "+id);
-            return 127;
+            throw new TaskNotFoundException("Didn't find a task in tasks list with this id: "+id);
         }
         System.out.println("Accepted.");
         return 0;
