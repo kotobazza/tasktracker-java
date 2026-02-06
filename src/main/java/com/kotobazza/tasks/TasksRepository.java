@@ -23,6 +23,30 @@ public class TasksRepository {
             .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
             .enable(SerializationFeature.INDENT_OUTPUT);;
 
+    private String buildUserFriendlyMessage(IOException e, Path path) {
+        if (e instanceof java.nio.file.AccessDeniedException) {
+            return String.format("No rights to process path: %s", path);
+        }
+
+        if (e instanceof java.nio.file.NoSuchFileException) {
+            return String.format("Error trying to create directory for tasks file: %s", path.getParent());
+        }
+
+        if (e.getMessage() != null &&
+                (e.getMessage().toLowerCase().contains("no space") ||
+                        e.getMessage().toLowerCase().contains("disk full"))) {
+            return "Storage is full";
+        }
+
+        if (e.getMessage() != null && e.getMessage().toLowerCase().contains("read-only")) {
+            return "Read-only file system";
+        }
+
+        return String.format("Error of file processing [%s:%s]", path.getFileName(), e.getMessage());
+    }
+
+
+
     public TasksRepository(){
         String xdgDataHome = System.getenv("XDG_DATA_HOME");
         Path baseDir;
@@ -61,14 +85,14 @@ public class TasksRepository {
 
         try{
             createFileIfNotExists(tasksJson);
-        } catch (Exception e) {
-            throw new TasksFilePrepareException("Didn't prepare tasks file due to IO error: " + e.getMessage());
+        } catch (IOException e) {
+            throw new TasksFilePrepareException("Didn't prepare tasks file due to IO error: " + buildUserFriendlyMessage(e, tasksJson));
         }
 
         try {
             tasksMapper.writeValue(new File(tasksJson.toUri()), tasks);
-        } catch (Exception e) {
-            throw new TasksSaveException("Didn't save tasks into file due to task mapper error: " + e.getMessage());
+        } catch (IOException e) {
+            throw new TasksSaveException("Didn't save tasks into file due to task mapper error: " + buildUserFriendlyMessage(e, tasksJson));
         }
     }
 
@@ -76,8 +100,8 @@ public class TasksRepository {
         Path tasksJson = defineEffectivePathToSaveTasks(location);
         try{
             createFileIfNotExists(tasksJson);
-        } catch (Exception e) {
-            throw new TasksFilePrepareException("Didn't prepare tasks file due to IO error: " + e.getMessage());
+        } catch (IOException e) {
+            throw new TasksFilePrepareException("Didn't prepare tasks file due to IO error: " + buildUserFriendlyMessage(e, tasksJson));
         }
 
 
@@ -92,8 +116,8 @@ public class TasksRepository {
                             Task::getId,
                             item -> item
                     ));
-        } catch (Exception e){
-            throw new TasksLoadException("Didn't load tasks from file due to task mapper error: " + e.getMessage());
+        } catch (IOException e){
+            throw new TasksLoadException("Didn't load tasks from file due to task mapper error: " + buildUserFriendlyMessage(e, tasksJson));
         }
     }
 
