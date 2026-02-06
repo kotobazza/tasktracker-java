@@ -16,7 +16,8 @@ public class TaskTrackerShowDetails extends TaskTrackerCommandSuperclass {
 
         printGreeting();
         printDivider(defaultOutputWidth);
-        System.out.println("Path used to save tasks: " + definedPath.toAbsolutePath().toUri().toASCIIString());
+        System.out.println("Path used to save tasks: ");
+        printPath(definedPath);
         return 0;
     }
 }

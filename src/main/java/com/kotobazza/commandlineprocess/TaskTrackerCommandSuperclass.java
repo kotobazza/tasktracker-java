@@ -5,6 +5,7 @@ import com.kotobazza.TaskState;
 import com.kotobazza.TasksService;
 
 
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
@@ -22,6 +23,11 @@ public abstract class TaskTrackerCommandSuperclass implements Callable<Integer> 
     }
 
     protected int defaultOutputWidth = 80;
+
+
+    protected void printPath(Path path){
+        System.out.println(path.toAbsolutePath().toUri().toASCIIString());
+    }
 
 
 
