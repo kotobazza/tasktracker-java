@@ -29,7 +29,7 @@ public class TaskTrackerRemove extends TaskTrackerCommandSuperclass{
         //TODO: double acceptance???
 
         tasks.remove(id);
-        if(!repo.saveTasks(tasks.values())){
+        if(!repo.saveTasks(tasks.values(), filePath)){
             System.out.println("Not saved tasks into location");
             return 127;
         }

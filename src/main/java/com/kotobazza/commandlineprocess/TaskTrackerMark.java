@@ -38,7 +38,7 @@ public class TaskTrackerMark extends TaskTrackerCommandSuperclass{
 
             task.setState(newState);
             tasks.put(task.getId(), task);
-            if(!repo.saveTasks(tasks.values())){
+            if(!repo.saveTasks(tasks.values(), filePath)){
                 System.out.println("Not saved tasks into location");
                 return 127;
             }

@@ -35,7 +35,7 @@ public class TaskTrackerEdit extends TaskTrackerCommandSuperclass{
         Task task = tasks.get(id);
         task.setDescription(newDescription);
         tasks.put(task.getId(), task);
-        if(!repo.saveTasks(tasks.values())){
+        if(!repo.saveTasks(tasks.values(), filePath)){
             System.out.println("Not saved tasks into location");
             return 127;
         }

@@ -31,7 +31,7 @@ public class TaskTrackerAdd extends TaskTrackerCommandSuperclass { ;
 
         printGreeting();
 
-        if(repo.saveTasks(tasks.values())){
+        if(repo.saveTasks(tasks.values(), filePath)){
             System.out.println("Accepted.");
             return 0;
         } else {
