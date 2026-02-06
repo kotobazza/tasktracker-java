@@ -24,21 +24,16 @@ public class TasksRepository {
             .enable(SerializationFeature.INDENT_OUTPUT);;
 
     public TasksRepository(){
-        String xdgConfigHome = System.getenv("XDG_DATA_HOME");
+        String xdgDataHome = System.getenv("XDG_DATA_HOME");
         Path baseDir;
 
-        if (xdgConfigHome != null && !xdgConfigHome.isBlank()) {
-            baseDir = Paths.get(xdgConfigHome);
+        if (xdgDataHome != null && !xdgDataHome.isBlank()) {
+            baseDir = Paths.get(xdgDataHome);
         } else {
             baseDir = Paths.get(System.getProperty("user.home"), ".local", "share");
         }
 
         defaultAppLocation = baseDir.resolve("com.kotobazza.tasktracker");
-
-        try{
-            if(!Files.exists(defaultAppLocation))
-                Files.createDirectories(defaultAppLocation);
-        } catch (IOException ignored){}
     }
 
 
@@ -61,19 +56,19 @@ public class TasksRepository {
         }
     }
 
-    public void saveTasks(Iterable<Task> tasks, Path saveInto) throws TasksFilePrepareException, TasksLoadException {
+    public void saveTasks(Iterable<Task> tasks, Path saveInto) throws TasksFilePrepareException, TasksSaveException {
         Path tasksJson = defineEffectivePathToSaveTasks(saveInto);
 
         try{
             createFileIfNotExists(tasksJson);
         } catch (IOException e) {
-            throw new TasksFilePrepareException("Didn't create tasks file due to IO error: " + e.getMessage());
+            throw new TasksFilePrepareException("Didn't prepare tasks file due to IO error: " + e.getMessage());
         }
 
         try {
             tasksMapper.writeValue(new File(tasksJson.toUri()), tasks);
         } catch (Exception e) {
-            throw new TasksLoadException("Didn't save tasks into file due to task mapper error: " + e.getMessage());
+            throw new TasksSaveException("Didn't save tasks into file due to task mapper error: " + e.getMessage());
         }
     }
 
@@ -82,7 +77,7 @@ public class TasksRepository {
         try{
             createFileIfNotExists(tasksJson);
         } catch (IOException e) {
-            throw new TasksFilePrepareException("Didn't create tasks file due to IO error: " + e.getMessage());
+            throw new TasksFilePrepareException("Didn't prepare tasks file due to IO error: " + e.getMessage());
         }
 
 
