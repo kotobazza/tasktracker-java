@@ -12,7 +12,8 @@ import picocli.CommandLine;
                 TaskTrackerMark.class,
                 TaskTrackerRemove.class,
                 TaskTrackerTable.class,
-                TaskTrackerEdit.class
+                TaskTrackerEdit.class,
+                TaskTrackerShowDetails.class
         }
 )
 public class TaskTracker extends TaskTrackerCommandSuperclass {
