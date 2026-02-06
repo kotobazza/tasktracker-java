@@ -7,13 +7,12 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class TasksRepository {
@@ -44,8 +43,12 @@ public class TasksRepository {
 
 
     private void createFileIfNotExists(Path path) throws IOException {
-        if(!Files.exists(path))
+        if(!Files.exists(path)){
+            Files.createDirectories(path.getParent());
             Files.createFile(path);
+            Files.writeString(path, "[]", Charset.defaultCharset());
+        }
+
     }
 
     public Path defineEffectivePathToSaveTasks(Path location){
@@ -58,37 +61,44 @@ public class TasksRepository {
         }
     }
 
-    public boolean saveTasks(Iterable<Task> tasks, Path saveInto){
+    public void saveTasks(Iterable<Task> tasks, Path saveInto) throws TasksFilePrepareException, TasksLoadException {
+        Path tasksJson = defineEffectivePathToSaveTasks(saveInto);
+
         try{
-            Path tasksJson = defineEffectivePathToSaveTasks(saveInto);
-
             createFileIfNotExists(tasksJson);
+        } catch (IOException e) {
+            throw new TasksFilePrepareException("Didn't create tasks file due to IO error: " + e.getMessage());
+        }
 
+        try {
             tasksMapper.writeValue(new File(tasksJson.toUri()), tasks);
-
-            return true;
-        } catch (IOException e){
-            return false;
+        } catch (Exception e) {
+            throw new TasksLoadException("Didn't save tasks into file due to task mapper error: " + e.getMessage());
         }
     }
 
-    public Map<String, Task> loadTasksFromLocation(Path location){
+    public Map<String, Task> loadTasksFromLocation(Path location) throws TasksFilePrepareException, TasksLoadException{
+        Path tasksJson = defineEffectivePathToSaveTasks(location);
         try{
-            Path tasksJson = defineEffectivePathToSaveTasks(location);
-
             createFileIfNotExists(tasksJson);
+        } catch (IOException e) {
+            throw new TasksFilePrepareException("Didn't create tasks file due to IO error: " + e.getMessage());
+        }
 
+
+        try{
             List<Task> loadedTasksFromDefault = tasksMapper.readValue(
                     new File(tasksJson.toUri()),
                     new TypeReference<>() {}
             );
+
             return loadedTasksFromDefault.stream()
                     .collect(Collectors.toMap(
                             Task::getId,
                             item -> item
                     ));
-        } catch (IOException e){
-            return new HashMap<>();
+        } catch (Exception e){
+            throw new TasksLoadException("Didn't load tasks from file due to task mapper error: " + e.getMessage());
         }
     }
 
