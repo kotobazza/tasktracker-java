@@ -7,6 +7,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -41,8 +42,12 @@ public class TasksRepository {
 
 
     private void createFileIfNotExists(Path path) throws IOException {
-        if(!Files.exists(path))
+        if(!Files.exists(path)){
+            Files.createDirectories(path.getParent());
             Files.createFile(path);
+            Files.writeString(path, "[]", Charset.defaultCharset());
+        }
+
     }
 
 
