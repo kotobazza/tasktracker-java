@@ -56,7 +56,7 @@ public class TasksRepository {
         }
     }
 
-    public void saveTasks(Iterable<Task> tasks, Path saveInto) throws TasksFilePrepareException, TasksLoadException {
+    public void saveTasks(Iterable<Task> tasks, Path saveInto) throws TasksFilePrepareException, TasksSaveException {
         Path tasksJson = defineEffectivePathToSaveTasks(saveInto);
 
         try{
@@ -68,7 +68,7 @@ public class TasksRepository {
         try {
             tasksMapper.writeValue(new File(tasksJson.toUri()), tasks);
         } catch (Exception e) {
-            throw new TasksLoadException("Didn't save tasks into file due to task mapper error: " + e.getMessage());
+            throw new TasksSaveException("Didn't save tasks into file due to task mapper error: " + e.getMessage());
         }
     }
 
