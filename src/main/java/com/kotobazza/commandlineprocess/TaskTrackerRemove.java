@@ -1,11 +1,8 @@
 package com.kotobazza.commandlineprocess;
 
-
-import com.kotobazza.tasks.Task;
 import picocli.CommandLine;
-
 import java.nio.file.Path;
-import java.util.Map;
+
 
 @CommandLine.Command(name = "remove", description = "Remove a task from list")
 public class TaskTrackerRemove extends TaskTrackerCommandSuperclass{

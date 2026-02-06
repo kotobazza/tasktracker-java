@@ -1,6 +1,5 @@
 package com.kotobazza.commandlineprocess;
 
-import com.kotobazza.tasks.Task;
 import com.kotobazza.tasks.TaskState;
 import picocli.CommandLine;
 import java.nio.file.Path;
