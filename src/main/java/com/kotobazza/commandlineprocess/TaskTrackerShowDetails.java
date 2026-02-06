@@ -12,7 +12,7 @@ public class TaskTrackerShowDetails extends TaskTrackerCommandSuperclass {
 
     @Override
     public Integer call() throws Exception {
-        Path definedPath = repo.defineEffectivePathToSaveTasks(filePath);
+        Path definedPath = service.getEffectivePathForTaskOnLocation(filePath);
 
         printGreeting();
         printDivider(defaultOutputWidth);
