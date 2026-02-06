@@ -22,7 +22,7 @@ public class TasksRepository {
             .enable(SerializationFeature.INDENT_OUTPUT);;
 
     public TasksRepository(){
-        String xdgConfigHome = System.getenv("XDG_CONFIG_HOME");
+        String xdgConfigHome = System.getenv("XDG_DATA_HOME");
         Path baseDir;
 
         if (xdgConfigHome != null && !xdgConfigHome.isBlank()) {
