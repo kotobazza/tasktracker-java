@@ -69,10 +69,6 @@ public class TasksRepository {
         }
     }
 
-    public Optional<List<Task>> loadTasksFromDefaultUserLocation() {
-        return loadTasksFromLocation(defaultAppLocation.resolve("tasks.json"));
-    }
-
     public Optional<List<Task>> loadTasksFromLocation(Path location){
         try{
             Path tasksJson = defineEffectivePathToSaveTasks(location);
