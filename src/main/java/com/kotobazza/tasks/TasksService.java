@@ -10,7 +10,7 @@ public class TasksService {
         return new TasksRepository();
     }
 
-    public void addNewTask(Path filePath, String description){
+    public void addNewTask(Path filePath, String description) throws TasksFilePrepareException, TasksLoadException, TasksSaveException{
         Map<String, Task> tasks = getRepo().loadTasksFromLocation(filePath);
         Task newTask = new Task(description);
 
@@ -19,7 +19,7 @@ public class TasksService {
         getRepo().saveTasks(tasks.values(), filePath);
     }
 
-    public boolean editTaskDescription(Path filePath, String id, String newDescription){
+    public boolean editTaskDescription(Path filePath, String id, String newDescription) throws TasksFilePrepareException, TasksLoadException, TasksSaveException{
         Map<String, Task> tasks = getRepo().loadTasksFromLocation(filePath);
 
         if(!tasks.containsKey(id)){
@@ -33,12 +33,12 @@ public class TasksService {
         return true;
     }
 
-    public Map<String, Task> getTasks(Path filePath){
+    public Map<String, Task> getTasks(Path filePath) throws TasksFilePrepareException, TasksLoadException{
         return getRepo().loadTasksFromLocation(filePath);
     }
 
 
-    public boolean markTaskWithState(Path filePath, String id, TaskState state){
+    public boolean markTaskWithState(Path filePath, String id, TaskState state) throws TasksFilePrepareException, TasksLoadException, TasksSaveException{
         Map<String, Task> tasks = getRepo().loadTasksFromLocation(filePath);
 
         if(!tasks.containsKey(id)){
@@ -53,7 +53,7 @@ public class TasksService {
         return true;
     }
 
-    public boolean removeTask(Path filePath, String id){
+    public boolean removeTask(Path filePath, String id) throws TasksFilePrepareException, TasksLoadException, TasksSaveException{
         Map<String, Task> tasks = getRepo().loadTasksFromLocation(filePath);
         boolean existed = tasks.containsKey(id);
         if (existed) {
