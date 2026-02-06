@@ -9,22 +9,21 @@ import java.util.Locale;
 @CommandLine.Command(name = "mark", description = "Mark task state")
 public class TaskTrackerMark extends TaskTrackerCommandSuperclass{
 
+    @CommandLine.ParentCommand
+    private TaskTracker tracker;
+
     @CommandLine.Parameters(index="0", description="Task identifier")
     private String id;
 
     @CommandLine.Parameters(index="1", description="Task state")
     private String state;
 
-    @CommandLine.Option(names = {"-f", "--file"},
-            description = "Task storage file (json)")
-    private Path filePath;
-
     @Override
     public Integer call() throws Exception {
         try{
             TaskState newState = TaskState.valueOf(state.toUpperCase(Locale.ROOT));
 
-            if(!getService().markTaskWithState(filePath, id, newState)){
+            if(!getService().markTaskWithState(tracker.filePath, id, newState)){
                 System.out.println("Not saved tasks into location");
                 return 127;
             }

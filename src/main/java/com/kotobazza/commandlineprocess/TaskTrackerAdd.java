@@ -5,9 +5,9 @@ import java.nio.file.Path;
 
 @CommandLine.Command(name = "add", description = "Add a new task")
 public class TaskTrackerAdd extends TaskTrackerCommandSuperclass { ;
-    @CommandLine.Option(names = {"-f", "--file"},
-            description = "Task storage file (json)")
-    private Path filePath;
+
+    @CommandLine.ParentCommand
+    private TaskTracker tracker;
 
     @CommandLine.Parameters(index="0", description="Task description")
     private String description;
@@ -16,7 +16,7 @@ public class TaskTrackerAdd extends TaskTrackerCommandSuperclass { ;
     @Override
     public Integer call() throws Exception {
 
-        getService().addNewTask(filePath, description);
+        getService().addNewTask(tracker.filePath, description);
 
         System.out.println("Accepted.");
         return 0;

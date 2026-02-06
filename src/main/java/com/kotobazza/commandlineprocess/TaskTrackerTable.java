@@ -8,28 +8,24 @@ import java.util.Map;
 
 @CommandLine.Command(name = "table", description = "Show whole info about tasks")
 public class TaskTrackerTable extends TaskTrackerCommandSuperclass{
-    @CommandLine.Option(names = {"-f", "--file"},
-            description = "Task storage file (json)")
-    private Path filePath;
 
-    @CommandLine.Option(names = {"-w", "--width"},
-            description = "Output table width")
-    private Integer outputWidth;
+    @CommandLine.ParentCommand
+    private TaskTracker tracker;
 
     @Override
     public Integer call() throws Exception {
-        Map<String, Task> tasks = getService().getTasks(filePath);
+        Map<String, Task> tasks = getService().getTasks(tracker.filePath);
 
         printGreeting();
 
-        if(outputWidth == null){
+        if(tracker.outputWidth == null){
             printDivider(defaultOutputWidth);
             printTasksTable(tasks, defaultOutputWidth);
             printDivider(defaultOutputWidth);
         } else{
-            printDivider(outputWidth);
-            printTasksTable(tasks, outputWidth);
-            printDivider(outputWidth);
+            printDivider(tracker.outputWidth);
+            printTasksTable(tasks, tracker.outputWidth);
+            printDivider(tracker.outputWidth);
         }
         return 0;
     }

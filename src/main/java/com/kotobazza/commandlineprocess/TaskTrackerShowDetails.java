@@ -6,13 +6,13 @@ import java.nio.file.Path;
 
 @CommandLine.Command(name = "show", description = "Show info about user environment")
 public class TaskTrackerShowDetails extends TaskTrackerCommandSuperclass {
-    @CommandLine.Option(names = {"-f", "--file"},
-            description = "Task storage file (json)")
-    private Path filePath;
+
+    @CommandLine.ParentCommand
+    private TaskTracker tracker;
 
     @Override
     public Integer call() throws Exception {
-        Path definedPath = getService().getEffectivePathForTaskOnLocation(filePath);
+        Path definedPath = getService().getEffectivePathForTaskOnLocation(tracker.filePath);
 
         printGreeting();
         printDivider(defaultOutputWidth);

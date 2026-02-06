@@ -6,19 +6,19 @@ import java.nio.file.Path;
 
 @CommandLine.Command(name = "remove", description = "Remove a task from list")
 public class TaskTrackerRemove extends TaskTrackerCommandSuperclass{
+
+    @CommandLine.ParentCommand
+    private TaskTracker tracker;
+
     @CommandLine.Parameters(index="0", description="Task identifier")
     private String id;
-
-    @CommandLine.Option(names = {"-f", "--file"},
-            description = "Task storage file (json)")
-    private Path filePath;
 
 
     @Override
     public Integer call() throws Exception {
 
 
-        if(!getService().removeTask(filePath, id)){
+        if(!getService().removeTask(tracker.filePath, id)){
             System.out.println("Not removed this task from tasks list: "+id);
             return 127;
         }
