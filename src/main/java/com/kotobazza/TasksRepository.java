@@ -55,9 +55,9 @@ public class TasksRepository {
         }
     }
 
-    public boolean saveTasks(Iterable<Task> tasks){
+    public boolean saveTasks(Iterable<Task> tasks, Path saveInto){
         try{
-            Path tasksJson = defaultAppLocation.resolve("tasks.json");
+            Path tasksJson = defineEffectivePathToSaveTasks(saveInto);
 
             createFileIfNotExists(tasksJson);
 
