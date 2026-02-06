@@ -5,7 +5,12 @@ import picocli.CommandLine;
 
 public class Main {
     public static void main(String[] args) {
-        int exitCode = new CommandLine(new TaskTracker()).execute(args);
-        System.exit(exitCode);
+
+        CommandLine cmd = new CommandLine(new TaskTracker());
+        cmd.setExecutionExceptionHandler((ex, cmdLine, parseResult) -> {
+            System.err.println("[!] " + ex.getMessage());
+            return 1;
+        });
+        System.exit(cmd.execute(args));
     }
 }
