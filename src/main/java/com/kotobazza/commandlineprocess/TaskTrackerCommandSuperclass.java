@@ -103,7 +103,7 @@ public abstract class TaskTrackerCommandSuperclass implements Callable<Integer> 
 
     public static void listTasks(Map<String, Task> tasks, Integer width){
         if(!tasks.isEmpty()){
-            int descriptionSectionSize = width - 19 - 2 - 19*2 -1;
+            int descriptionSectionSize = width - 19 - 2;
             for(Task task : tasks.values()){
                 if(task.getState() == TaskState.DONE)
                     continue;
