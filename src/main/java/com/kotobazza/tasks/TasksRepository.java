@@ -24,11 +24,11 @@ public class TasksRepository {
             .enable(SerializationFeature.INDENT_OUTPUT);;
 
     public TasksRepository(){
-        String xdgConfigHome = System.getenv("XDG_DATA_HOME");
+        String xdgDataHome = System.getenv("XDG_DATA_HOME");
         Path baseDir;
 
-        if (xdgConfigHome != null && !xdgConfigHome.isBlank()) {
-            baseDir = Paths.get(xdgConfigHome);
+        if (xdgDataHome != null && !xdgDataHome.isBlank()) {
+            baseDir = Paths.get(xdgDataHome);
         } else {
             baseDir = Paths.get(System.getProperty("user.home"), ".local", "share");
         }
